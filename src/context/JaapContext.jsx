@@ -16,7 +16,7 @@ const emptySession = {
 export function JaapProvider({ children }) {
   const [selectedMantraId, setSelectedMantraId] = useLocalStorage("selectedMantraId", "radha");
   const [totals, setTotals] = useLocalStorage("jaapTotals", {});
-  const [history, setHistory] = useLocalStorage("jaapHistory", []);
+  const [history, setHistory] = useLoocalStorage("jaapHistory", []);
   const [wallpapers, setWallpapers] = useLocalStorage("jaapWallpapers", {});
   const [session, setSession] = useState({ ...emptySession, mantraId: selectedMantraId });
   const [isMuted, setIsMuted] = useLocalStorage("jaapMuted", false);
