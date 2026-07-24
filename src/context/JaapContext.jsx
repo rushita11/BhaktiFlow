@@ -35,7 +35,7 @@ export function JaapProvider({ children }) {
     });
   };
 
-  const incrementJaap = () => {
+  const incrementJaap = async() => {
     setSession((previous) => ({ ...previous, count: previous.count + 1 }));
     setTotals((previous) => ({
       ...previous,
@@ -45,6 +45,14 @@ export function JaapProvider({ children }) {
     const audio = audioRef.current;
     if (audio && !isMuted) {
       audio.currentTime = 0;
+      console.log("gggggg");
+      
+    try{
+        await audio.play();
+    }catch(error){
+      console.log(error, "rr");
+      
+    }
       audio.play().catch(() => {});
     }
   };

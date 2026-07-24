@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 import WallpaperPicker from "../components/WallpaperPicker";
 import { useJaap } from "../context/JaapContext";
+import { v4 as uuidv4 } from "uuid";
 
 const formatTime = (totalSeconds) => {
   const hours = Math.floor(totalSeconds / 3600);
@@ -52,8 +53,10 @@ export default function JaapPage() {
   });
 
   const handleCount = () => {
+    console.log("function call");
+    
     incrementJaap();
-    const id = crypto.randomUUID();
+    const id = uuidv4();
     setFloatingWords((items) => [...items, { id, left: 15 + Math.random() * 70 }]);
     window.setTimeout(() => setFloatingWords((items) => items.filter((item) => item.id !== id)), 1700);
     navigator.vibrate?.(18);
@@ -64,12 +67,26 @@ export default function JaapPage() {
     navigate("/summary");
   };
 
+
+  console.log(floatingWords, "floatingWords");
+  
+  // console.log(mantra, "mantra");
+
+
   return (
     <div
       className={`screen jaap-page ${selectedWallpaper ? "has-wallpaper" : ""}`}
       style={selectedWallpaper ? { backgroundImage: `linear-gradient(rgba(32, 14, 7, .42), rgba(32, 14, 7, .62)), url(${selectedWallpaper})` } : undefined}
     >
-      <audio ref={audioRef} src={mantra.audio} preload="auto" />
+      {/* <audio
+        ref={audioRef}
+        src={mantra.audio}
+        preload="auto"
+        controls
+        onError={(event) => {
+          console.error(event.currentTarget.error);
+        }}
+      /> */}
 
       <header className="jaap-header">
         <button className="icon-button glass" onClick={() => setShowExit(true)} aria-label="End session"><ArrowLeft size={20} /></button>
